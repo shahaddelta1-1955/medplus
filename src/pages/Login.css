@@ -96,16 +96,16 @@
 /* 📱 Mobile View */
 @media (max-width: 768px) {
 
-  .login-container {
+  .pharmacy-login-container {
     flex-direction: column;
     height: auto;
   }
 
-  .login-left {
-    display: none;   /* hide the image side */
+  .left-panel {
+    display: none; /* hide welcome side on mobile */
   }
 
-  .login-right {
+  .right-panel {
     width: 100%;
     padding: 20px;
   }
