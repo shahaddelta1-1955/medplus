@@ -5,8 +5,8 @@ body {
   background: #f3f5f4;
 }
 
-/* PAGE WRAPPER - centers the card */
-.page-wrapper {
+/* CENTER EVERYTHING USING THIS */
+.pharmacy-login-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,20 +14,34 @@ body {
   padding: 20px;
 }
 
-/* MAIN LOGIN CARD */
+/* ACTUAL LOGIN CARD */
+.pharmacy-login-container > .left-panel,
+.pharmacy-login-container > .right-panel {
+  height: 600px;
+}
+
+/* WRAP PANELS IN CARD */
 .pharmacy-login-container {
-  display: flex;
-  width: 950px;
-  max-width: 100%;
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.pharmacy-login-container::before {
+  content: "";
+}
+
+/* INNER CARD */
+.pharmacy-login-container {
+  flex-direction: row;
+}
+
+/* Create card wrapper effect */
+.left-panel,
+.right-panel {
+  width: 450px;
 }
 
 /* LEFT PANEL */
 .left-panel {
-  width: 50%;
   background: #dfeee8;
   display: flex;
   flex-direction: column;
@@ -35,9 +49,21 @@ body {
   align-items: center;
   position: relative;
   padding: 60px 40px;
-  text-align: center;
+  border-radius: 16px 0 0 16px;
 }
 
+/* RIGHT PANEL */
+.right-panel {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+  border-radius: 0 16px 16px 0;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* BACK BUTTON */
 .back-btn {
   position: absolute;
   top: 20px;
@@ -50,6 +76,7 @@ body {
   cursor: pointer;
 }
 
+/* LOGO */
 .logo-box {
   width: 80px;
   height: 80px;
@@ -64,30 +91,10 @@ body {
   border-radius: 8px;
 }
 
+/* TEXT */
 .welcome-box {
+  text-align: center;
   max-width: 300px;
-}
-
-.welcome-box h1 {
-  margin-bottom: 20px;
-  font-size: 32px;
-}
-
-.welcome-box p {
-  color: #333;
-}
-
-/* RIGHT PANEL */
-.right-panel {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 60px;
-}
-
-.right-panel h2 {
-  margin-bottom: 10px;
 }
 
 .subtitle {
@@ -95,15 +102,16 @@ body {
   margin-bottom: 25px;
 }
 
+/* INPUTS */
 .right-panel input {
   width: 100%;
   padding: 12px;
   margin-bottom: 16px;
   border-radius: 6px;
   border: 1px solid #ddd;
-  font-size: 14px;
 }
 
+/* BUTTON */
 .login-btn {
   width: 100%;
   padding: 12px;
@@ -112,8 +120,6 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 15px;
-  transition: 0.2s ease;
 }
 
 .login-btn:hover {
@@ -130,8 +136,8 @@ body {
   cursor: pointer;
 }
 
-/* MOBILE RESPONSIVE */
-@media (max-width: 768px) {
+/* MOBILE */
+@media (max-width: 900px) {
   .pharmacy-login-container {
     flex-direction: column;
   }
@@ -142,6 +148,6 @@ body {
 
   .right-panel {
     width: 100%;
-    padding: 30px 20px;
+    border-radius: 16px;
   }
 }
