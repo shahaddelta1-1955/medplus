@@ -2,40 +2,39 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  background: #f5f7f6;
+  background: #f3f5f4;
 }
 
-/* PAGE WRAPPER (NEW - centers everything) */
+/* CENTER WRAPPER */
 .page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-/* MAIN LOGIN CONTAINER */
+/* LOGIN CARD */
 .pharmacy-login-container {
   display: flex;
-  width: 1000px;
-  max-width: 95%;
-  height: 600px;
-  background: #ffffff;
-  border-radius: 12px;
+  width: 900px;
+  max-width: 100%;
+  background: white;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
 
 /* LEFT PANEL */
-
 .left-panel {
-  flex: 1;
+  width: 50%;
   background: #dfeee8;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 40px;
+  padding: 60px 40px;
 }
 
 .back-btn {
@@ -69,10 +68,8 @@ body {
 }
 
 /* RIGHT PANEL */
-
 .right-panel {
-  flex: 1;
-  background: #ffffff;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -90,7 +87,6 @@ body {
   margin-bottom: 16px;
   border-radius: 6px;
   border: 1px solid #ddd;
-  font-size: 14px;
 }
 
 .login-btn {
@@ -101,8 +97,6 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 15px;
-  transition: 0.2s ease;
 }
 
 .login-btn:hover {
@@ -119,18 +113,10 @@ body {
   cursor: pointer;
 }
 
-/* 📱 Mobile View */
+/* MOBILE */
 @media (max-width: 768px) {
-
-  .page-wrapper {
-    height: auto;
-  }
-
   .pharmacy-login-container {
     flex-direction: column;
-    height: auto;
-    border-radius: 0;
-    box-shadow: none;
   }
 
   .left-panel {
