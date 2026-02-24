@@ -3,7 +3,26 @@ import { auth, db } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { getDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 import "./Login.css";
+
+function Login() {
+  return (
+    <div className="login-page">
+
+      <div className="login-card">
+        <h2>Welcome Back 👋</h2>
+        <p>Login to continue to MedPlus</p>
+
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+
+        <button>Login</button>
+      </div>
+
+    </div>
+  );
+}
 
 function Login() {
   const [email, setEmail] = useState("");
