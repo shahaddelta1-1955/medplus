@@ -58,7 +58,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 60px;
+  padding: 00px;
   border-radius: 0 16px 16px 0;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
