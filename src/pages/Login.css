@@ -93,3 +93,21 @@
   color: #17b26a;
   cursor: pointer;
 }
+/* 📱 Mobile View */
+@media (max-width: 768px) {
+
+  .login-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .login-left {
+    display: none;   /* hide the image side */
+  }
+
+  .login-right {
+    width: 100%;
+    padding: 20px;
+  }
+
+}
