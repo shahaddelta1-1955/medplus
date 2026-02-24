@@ -7,19 +7,29 @@ import React from "react";
 import "./Login.css";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div className="login-page">
-
       <div className="login-card">
         <h2>Welcome Back 👋</h2>
         <p>Login to continue to MedPlus</p>
 
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
+        <input
+          type="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
         <button>Login</button>
       </div>
-
     </div>
   );
 }
