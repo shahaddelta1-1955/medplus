@@ -49,7 +49,7 @@
 /* RIGHT PANEL */
 
 .right-panel {
-  flex: 2;
+  flex: 1;
   background: #ffffff;
   display: flex;
   flex-direction: column;
