@@ -1,147 +1,101 @@
-/* GLOBAL RESET */
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
 }
 
-/* FULL SCREEN SPLIT */
-.pharmacy-login-container {
+.container {
   display: flex;
   height: 100vh;
   width: 100%;
 }
 
-/* LEFT SIDE (50%) */
-.left-panel {
+.left-panel,
+.right-panel {
   width: 50%;
-  background: #dfeee8;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 60px;
+  padding: 80px;
+  box-sizing: border-box;
 }
 
-.back-btn {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: #1c9c6b;
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
+/* LEFT SIDE */
+.left-panel {
+  background-color: #c8d7d3;
 }
 
 .logo-box {
-  width: 90px;
-  height: 90px;
-  background: #17b26a;
+  background-color: #22a96a;
+  color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
   font-weight: bold;
   font-size: 22px;
-  margin-bottom: 25px;
-  border-radius: 10px;
+  margin-bottom: 40px;
 }
 
-.welcome-box {
-  text-align: center;
-  max-width: 380px;
+.left-panel h1 {
+  font-size: 48px;
+  margin: 0 0 20px;
+  color: #1f3b4d;
 }
 
-.welcome-box h1 {
-  font-size: 44px;
-  margin-bottom: 20px;
-  color: #2c3e50;
-}
-
-.welcome-box p {
-  color: #2c3e50;
-  font-size: 16px;
+.left-panel p {
+  max-width: 400px;
   line-height: 1.6;
+  color: #1f3b4d;
 }
 
-/* RIGHT SIDE (50%) */
+/* RIGHT SIDE */
 .right-panel {
-  width: 50%;
-  background: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 60px;
+  background-color: #f4f4f4;
+  align-items: center;
 }
 
-.right-panel h2 {
-  font-size: 28px;
+.form-container {
+  width: 100%;
+  max-width: 420px;
+}
+
+.form-container h2 {
   margin-bottom: 10px;
-  color: #2c3e50;
 }
 
-.subtitle {
-  color: #666;
+.form-container p {
   margin-bottom: 30px;
-  font-size: 15px;
-}
-
-.right-panel input {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 18px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  font-size: 14px;
-}
-
-.login-btn {
-  width: 100%;
-  padding: 14px;
-  background: #17b26a;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.2s ease;
-}
-
-.login-btn:hover {
-  background: #139a5a;
-}
-
-.register-text {
-  margin-top: 20px;
   color: #666;
-  font-size: 14px;
 }
 
-.register-text span {
-  color: #17b26a;
+input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background-color: #22a96a;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 500;
 }
 
-/* MOBILE RESPONSIVE */
-@media (max-width: 768px) {
-  .pharmacy-login-container {
-    flex-direction: column;
-  }
+button:hover {
+  background-color: #1b8e59;
+}
 
-  .left-panel {
-    display: none;
-  }
-
-  .right-panel {
-    width: 100%;
-    padding: 40px 20px;
-  }
+/* BACK BUTTON FIX */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
