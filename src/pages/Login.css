@@ -1,26 +1,30 @@
-/* RESET */
+/* GLOBAL RESET */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: sans-serif;
 }
 
-/* FULL SCREEN CONTAINER */
+/* FULL SCREEN SPLIT */
 .pharmacy-login-container {
   display: flex;
   height: 100vh;
   width: 100%;
 }
 
-/* LEFT PANEL */
+/* LEFT SIDE (50%) */
 .left-panel {
-  flex: 1;
+  width: 50%;
   background: #dfeee8;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 40px;
+  padding: 60px;
 }
 
 .back-btn {
@@ -33,54 +37,60 @@ body {
   padding: 10px 14px;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .logo-box {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   background: #17b26a;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: bold;
-  font-size: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
+  font-size: 22px;
+  margin-bottom: 25px;
+  border-radius: 10px;
 }
 
 .welcome-box {
   text-align: center;
-  max-width: 350px;
+  max-width: 380px;
 }
 
 .welcome-box h1 {
-  font-size: 42px;
+  font-size: 44px;
   margin-bottom: 20px;
+  color: #2c3e50;
 }
 
 .welcome-box p {
-  color: #333;
+  color: #2c3e50;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-/* RIGHT PANEL */
+/* RIGHT SIDE (50%) */
 .right-panel {
-  flex: 1;
+  width: 50%;
   background: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px;
+  padding: 60px;
 }
 
 .right-panel h2 {
   font-size: 28px;
   margin-bottom: 10px;
+  color: #2c3e50;
 }
 
 .subtitle {
   color: #666;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  font-size: 15px;
 }
 
 .right-panel input {
@@ -111,14 +121,16 @@ body {
 .register-text {
   margin-top: 20px;
   color: #666;
+  font-size: 14px;
 }
 
 .register-text span {
   color: #17b26a;
   cursor: pointer;
+  font-weight: 500;
 }
 
-/* MOBILE */
+/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
   .pharmacy-login-container {
     flex-direction: column;
@@ -129,6 +141,7 @@ body {
   }
 
   .right-panel {
+    width: 100%;
     padding: 40px 20px;
   }
 }
