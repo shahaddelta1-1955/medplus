@@ -60,9 +60,13 @@ return (
 
     <div className="right-panel">
       <h2>Pharmacy Login</h2>
-      <p className="subtitle">
-        Access your MedPlus dashboard and manage your store.
-      </p>
+<div className="mobile-logo">
+  <img src={logo} alt="MedPlus Logo" />
+</div>
+
+<p className="subtitle">
+  Access your MedPlus dashboard and manage your store.
+</p>
 
       <form onSubmit={handleLogin}>
         <input
