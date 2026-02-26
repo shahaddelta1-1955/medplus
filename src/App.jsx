@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Landing from "./pages/Landing";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import PharmacyDashboard from "./pages/PharmacyDashboard";
 import CustomerDashboard from "./pages/CustomerDashboard";
 import AddMedicine from "./pages/AddMedicine";
 import BulkUpload from "./pages/BulkUpload";
-import Landing from "./pages/Landing";
+
 
 function App() {
   return (
