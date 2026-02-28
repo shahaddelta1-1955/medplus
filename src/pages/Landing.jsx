@@ -97,6 +97,7 @@ const S = {
     overflow: "hidden",
     maxWidth: "740px",
     boxShadow: "0 1px 3px rgba(0,0,0,0.07)",
+    flexWrap: "nowrap",
   },
   searchInput: {
     flex: 1,
@@ -111,8 +112,7 @@ const S = {
     lineHeight: "normal",
   },
   cityInput: {
-    width: "200px",
-    flexShrink: 0,
+    flex: 1,
     padding: "13px 16px",
     border: "none",
     outline: "none",
@@ -219,8 +219,8 @@ export default function Landing() {
           <a href="#pricing"     className="ln-nav-anchor">Pricing</a>
         </div>
 
-        {/* Inline styles on nav buttons so global CSS can't override */}
-        <div style={{ display:"flex", alignItems:"center", gap:"8px", flexWrap:"unwrap" }}>
+        {/* FIX 1: changed flexWrap from "unwrap" (invalid) to "nowrap" */}
+        <div style={{ display:"flex", alignItems:"center", gap:"8px", flexWrap:"nowrap" }}>
           <button style={S.navBtn(false)} onClick={() => navigate("/login")}>Customer Login</button>
           <button style={S.navBtn(false)} onClick={() => navigate("/register")}>Customer Register</button>
           <button style={S.navBtn(false)} onClick={() => navigate("/login")}>Pharmacy Login</button>
@@ -234,7 +234,7 @@ export default function Landing() {
           <h1 className="ln-h1">Live Medicine Stock Near You</h1>
           <p className="ln-sub">Search real-time availability and compare prices across nearby pharmacies.</p>
 
-          {/* Inline styles on search bar so global CSS can't break it */}
+          {/* FIX 2: searchBox now has flexWrap:nowrap, cityInput uses flex:1 instead of fixed width */}
           <div style={S.searchBox}>
             <input
               style={S.searchInput}
