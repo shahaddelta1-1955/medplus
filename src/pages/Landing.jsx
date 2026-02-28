@@ -97,7 +97,7 @@ const S = {
     overflow: "hidden",
     maxWidth: "1280px",
     boxShadow: "0 1px 3px rgba(0,0,0,0.07)",
-    flexWrap: "nowrap",
+    flexWrap: "wrap",
   },
   searchInput: {
     flex: 1,
