@@ -95,7 +95,7 @@ const S = {
     borderRadius: "10px",
     border: "1px solid #d1d5db",
     overflow: "hidden",
-    maxWidth: "740px",
+    maxWidth: "1280px",
     boxShadow: "0 1px 3px rgba(0,0,0,0.07)",
     flexWrap: "nowrap",
   },
