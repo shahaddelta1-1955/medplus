@@ -220,7 +220,7 @@ export default function Landing() {
         </div>
 
         {/* Inline styles on nav buttons so global CSS can't override */}
-        <div style={{ display:"flex", alignItems:"center", gap:"8px", flexWrap:"wrap" }}>
+        <div style={{ display:"flex", alignItems:"center", gap:"8px", flexWrap:"unwrap" }}>
           <button style={S.navBtn(false)} onClick={() => navigate("/login")}>Customer Login</button>
           <button style={S.navBtn(false)} onClick={() => navigate("/register")}>Customer Register</button>
           <button style={S.navBtn(false)} onClick={() => navigate("/login")}>Pharmacy Login</button>
