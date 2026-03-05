@@ -99,3 +99,19 @@ button:hover {
   top: 20px;
   left: 20px;
 }
+/* ===== Navbar Logo ===== */
+
+.ln-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.ln-logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}

@@ -15,10 +15,11 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/pharmacy-dashboard" element={<PharmacyDashboard />} />
-        <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+        <Route path="/pharmacydashboard" element={<PharmacyDashboard />} />
+        <Route path="/customerdashboard" element={<CustomerDashboard />} />
         <Route path="/add-medicine" element={<AddMedicine />} />
         <Route path="/bulk-upload" element={<BulkUpload />} />
+
       </Routes>
     </Router>
   );
