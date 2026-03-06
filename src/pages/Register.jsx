@@ -380,7 +380,7 @@ function Register() {
 
               <div className="rg-field">
                 <label>Full Name</label>
-                <input type="text" placeholder="John Doe" value={name} onChange={e => setName(e.target.value)} required />
+                <input type="text" placeholder="Username" value={name} onChange={e => setName(e.target.value)} required />
               </div>
 
               <div className="rg-field">
