@@ -810,7 +810,7 @@ export default function LandingPage() {
         {/* ── NAVBAR ── */}
         <nav className="lp-nav" style={{ boxShadow: scrolled ? "0 4px 24px rgba(0,204,85,0.1)" : undefined }}>
           <div className="lp-nav-left">
-            <img src="src/assets/logo.png" alt="Med+" className="lp-nav-logo" />
+            <img src="assets/logo.png" alt="Med+" className="lp-nav-logo" />
             <span className="lp-nav-brand">Med+</span>
           </div>
 
