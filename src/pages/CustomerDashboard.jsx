@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { auth, db } from "../firebase";
 import { signOut } from "firebase/auth";
@@ -138,18 +138,18 @@ const styles = `
   @keyframes spin { to { transform:rotate(360deg); } }
 
   /* ── MAP + OCR ── */
-  .cd-hero-widgets { display:flex; gap:12px; max-width:960px; margin:16px auto 0; position:relative; z-index:1; text-align:left; }
-  .cd-map-widget { flex:1; min-height:180px; border-radius:12px; overflow:hidden; border:1.5px solid #c8f5db; box-shadow:0 2px 12px rgba(0,204,85,0.1); position:relative; }
-  .cd-map-widget .leaflet-container { width:100% !important; height:180px !important; border-radius:10px; }
-  .cd-ocr-widget { width:200px; flex-shrink:0; background:#fff; border:1.5px solid #c8f5db; border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:7px; }
-  .cd-ocr-widget-title { font-size:11px; font-weight:700; color:#003314; display:flex; align-items:center; gap:5px; }
-  .cd-ocr-drop { border:2px dashed #99eebb; border-radius:8px; padding:8px 6px; text-align:center; cursor:pointer; transition:border-color 0.2s,background 0.2s; display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .cd-hero-widgets { display:flex; gap:16px; max-width:960px; margin:20px auto 0; position:relative; z-index:1; text-align:left; }
+  .cd-map-widget { flex:1; min-height:220px; border-radius:14px; overflow:hidden; border:1.5px solid #c8f5db; box-shadow:0 2px 12px rgba(0,204,85,0.1); position:relative; }
+  .cd-map-widget .leaflet-container { width:100% !important; height:220px !important; border-radius:12px; }
+  .cd-ocr-widget { width:220px; flex-shrink:0; background:#fff; border:1.5px solid #c8f5db; border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:10px; }
+  .cd-ocr-widget-title { font-size:12px; font-weight:700; color:#003314; display:flex; align-items:center; gap:6px; }
+  .cd-ocr-drop { border:2px dashed #99eebb; border-radius:10px; padding:14px 10px; text-align:center; cursor:pointer; transition:border-color 0.2s,background 0.2s; display:flex; flex-direction:column; align-items:center; gap:6px; }
   .cd-ocr-drop:hover,.cd-ocr-drop.drag { border-color:#00cc55; background:#edfff5; }
   .cd-ocr-drop.has-img { border-style:solid; border-color:#00cc55; padding:0; overflow:hidden; }
-  .cd-ocr-drop img { width:100%; height:50px; object-fit:cover; border-radius:6px; }
-  .cd-ocr-drop-icon { font-size:1.1rem; }
-  .cd-ocr-drop-text { font-size:10px; font-weight:600; color:#003314; }
-  .cd-ocr-drop-hint { font-size:9px; color:#88ccaa; }
+  .cd-ocr-drop img { width:100%; height:80px; object-fit:cover; border-radius:8px; }
+  .cd-ocr-drop-icon { font-size:1.4rem; }
+  .cd-ocr-drop-text { font-size:11px; font-weight:600; color:#003314; }
+  .cd-ocr-drop-hint { font-size:10px; color:#88ccaa; }
   .cd-ocr-progress { height:4px; background:#d4f0e0; border-radius:100px; overflow:hidden; }
   .cd-ocr-progress-fill { height:100%; background:#00cc55; border-radius:100px; transition:width 0.3s ease; }
   .cd-ocr-status { font-size:10px; color:#5a8a6a; }
@@ -223,7 +223,7 @@ const styles = `
     .cd-main { padding:24px 16px 60px; }
     .cd-hero-widgets { flex-direction:column; }
     .cd-ocr-widget { width:100%; }
-    .cd-map-widget .leaflet-container { height:130px !important; }
+    .cd-map-widget .leaflet-container { height:200px !important; }
     .cd-search-grid { grid-template-columns:1fr; }
   }
 `;
@@ -235,45 +235,21 @@ const DEMO_PHARMACIES = [
   { id:"4", name:"Apollo Pharma",      address:"Sector 22 Market",     distance:"3.4 km", open:false, inStock:true,  lat:11.1060, lng:76.0700 },
 ];
 
-function MapUpdater({ center, zoom }) {
-  const map = useMap();
-  useEffect(() => { map.setView(center, zoom, { animate: true }); }, [center, zoom]);
-  return null;
-}
-
-function PharmacyMap({ pharmacies, searchResults, hasSearched }) {
-  const displayList = hasSearched && searchResults.length > 0 ? searchResults : pharmacies;
-  const center = displayList.length > 0 && displayList[0].lat
-    ? [displayList[0].lat, displayList[0].lng]
-    : [11.1085, 76.0780];
-  const zoom = hasSearched && searchResults.length > 0 ? 13 : 12;
-
-  const resultIcon = new L.Icon({
-    iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
-    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-    iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41],
-  });
-
+function PharmacyMap({ pharmacies }) {
+  const center = pharmacies.length > 0 ? [pharmacies[0].lat, pharmacies[0].lng] : [11.1085, 76.0780];
   return (
-    <MapContainer center={center} zoom={zoom} scrollWheelZoom={false} style={{ width:"100%", height:"100%", borderRadius:"12px" }}>
+    <MapContainer center={center} zoom={13} scrollWheelZoom={false} style={{ width:"100%", height:"220px", borderRadius:"12px" }}>
       <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <MapUpdater center={center} zoom={zoom} />
-      {displayList.map(ph => ph.lat && ph.lng ? (
-        <Marker key={ph.id} position={[ph.lat, ph.lng]} icon={hasSearched ? resultIcon : pharmacyIcon}>
+      {pharmacies.map(ph => ph.lat && ph.lng ? (
+        <Marker key={ph.id} position={[ph.lat, ph.lng]} icon={pharmacyIcon}>
           <Popup>
-            <div style={{ fontFamily:"DM Sans,sans-serif", minWidth:160 }}>
+            <div style={{ fontFamily:"DM Sans,sans-serif", minWidth:140 }}>
               <div style={{ fontWeight:700, fontSize:13, color:"#003314", marginBottom:4 }}>{ph.name}</div>
               <div style={{ fontSize:12, color:"#5a8a6a", marginBottom:3 }}>📍 {ph.address}</div>
-              <div style={{ fontSize:12, color:"#5a8a6a", marginBottom:3 }}>🕐 {ph.open ? "Open now" : "Closed"}{ph.distance ? " · " + ph.distance : ""}</div>
-              {hasSearched && ph.matchedMeds && (
-                <div style={{ marginTop:6, borderTop:"1px solid #edfff5", paddingTop:5 }}>
-                  {ph.matchedMeds.map(m => (
-                    <div key={m.id||m.name} style={{ fontSize:11.5, color:"#00aa44", fontWeight:600, marginBottom:2 }}>
-                      💊 {m.name}{m.price != null ? " · ₹" + m.price : ""}{m.stock != null ? " · " + (m.stock === 0 ? "Out of stock" : "Stock: " + m.stock) : ""}
-                    </div>
-                  ))}
-                </div>
-              )}
+              <div style={{ fontSize:12, color:"#5a8a6a", marginBottom:3 }}>🕐 {ph.open ? "Open now" : "Closed"} · {ph.distance}</div>
+              <div style={{ fontSize:12, fontWeight:600, color: ph.inStock ? "#00cc55" : "#e53e3e" }}>
+                {ph.inStock ? "✓ In stock" : "✗ Out of stock"}
+              </div>
             </div>
           </Popup>
         </Marker>
@@ -618,59 +594,6 @@ export default function CustomerDashboard() {
                 </button>
               </div>
 
-              {/* MAP + OCR */}
-              {hasSearched && searchResults.length > 0 && (
-                <p style={{ fontSize:12, fontWeight:600, color:"#00cc55", textAlign:"center", marginTop:12, position:"relative", zIndex:1 }}>📍 Showing {searchResults.filter(p=>p.lat).length} pharmacies on map</p>
-              )}
-              <div className="cd-hero-widgets">
-                  <div className="cd-map-widget">
-                    <PharmacyMap pharmacies={pharmacies} searchResults={searchResults} hasSearched={hasSearched} />
-                  </div>
-                  <div className="cd-ocr-widget">
-                    <div className="cd-ocr-widget-title">📷 Scan Prescription</div>
-                    <div
-                      className={`cd-ocr-drop${ocrPreview?" has-img":""}${ocrDrag?" drag":""}`}
-                      onClick={() => !ocrPreview && ocrFileRef.current?.click()}
-                      onDragOver={e => { e.preventDefault(); setOcrDrag(true); }}
-                      onDragLeave={() => setOcrDrag(false)}
-                      onDrop={e => { e.preventDefault(); setOcrDrag(false); handleOcrFile(e.dataTransfer.files[0]); }}
-                    >
-                      {ocrPreview ? <img src={ocrPreview} alt="rx" /> : <>
-                        <div className="cd-ocr-drop-icon">🖼️</div>
-                        <div className="cd-ocr-drop-text">Upload / drop image</div>
-                        <div className="cd-ocr-drop-hint">or use camera below</div>
-                      </>}
-                    </div>
-                    <input ref={ocrFileRef} type="file" accept="image/*" style={{ display:"none" }} onChange={e => handleOcrFile(e.target.files[0])} />
-                    <canvas ref={canvasRef} style={{ display:"none" }} />
-                    {cameraOn && (
-                      <div style={{ borderRadius:8, overflow:"hidden", border:"1.5px solid #99eebb" }}>
-                        <video ref={videoRef} autoPlay playsInline style={{ width:"100%", display:"block", height:55, objectFit:"cover" }} />
-                      </div>
-                    )}
-                    <div style={{ display:"flex", gap:6 }}>
-                      {!cameraOn
-                        ? <button className="cd-ocr-btn-gray" style={{ flex:1 }} onClick={startCamera}>📷 Camera</button>
-                        : <><button className="cd-ocr-btn" style={{ flex:1 }} onClick={snapPhoto}>📸 Snap</button><button className="cd-ocr-btn-gray" style={{ flex:1 }} onClick={stopCamera}>✕</button></>
-                      }
-                      {ocrPreview && <button className="cd-ocr-btn-gray" style={{ flex:1 }} onClick={() => { setOcrImage(null); setOcrPreview(null); setOcrMeds([]); }}>↺</button>}
-                    </div>
-                    {ocrProcessing && <>
-                      <div className="cd-ocr-progress"><div className="cd-ocr-progress-fill" style={{ width:`${ocrProgress}%` }} /></div>
-                      <div className="cd-ocr-status">{ocrStatus}</div>
-                    </>}
-                    {ocrMeds.length > 0 && (
-                      <div className="cd-ocr-meds">
-                        {ocrMeds.map(m => <span key={m} className="cd-ocr-med-chip" title="Click to save" onClick={() => saveMedFromOcr(m)}>{m}</span>)}
-                      </div>
-                    )}
-                    <button className="cd-ocr-btn" onClick={runOCR} disabled={!ocrImage || ocrProcessing}>
-                      {ocrProcessing ? "Scanning..." : "🔍 Scan Now"}
-                    </button>
-                  </div>
-                </div>
-            </div>
-
               {/* SEARCH RESULTS */}
               {hasSearched && (
                 <div className="cd-search-results">
@@ -750,7 +673,55 @@ export default function CustomerDashboard() {
                 </div>
               )}
 
-
+              {/* MAP + OCR */}
+              <div className="cd-hero-widgets">
+                  <div className="cd-map-widget">
+                    <PharmacyMap pharmacies={pharmacies} />
+                  </div>
+                  <div className="cd-ocr-widget">
+                    <div className="cd-ocr-widget-title">📷 Scan Prescription</div>
+                    <div
+                      className={`cd-ocr-drop${ocrPreview?" has-img":""}${ocrDrag?" drag":""}`}
+                      onClick={() => !ocrPreview && ocrFileRef.current?.click()}
+                      onDragOver={e => { e.preventDefault(); setOcrDrag(true); }}
+                      onDragLeave={() => setOcrDrag(false)}
+                      onDrop={e => { e.preventDefault(); setOcrDrag(false); handleOcrFile(e.dataTransfer.files[0]); }}
+                    >
+                      {ocrPreview ? <img src={ocrPreview} alt="rx" /> : <>
+                        <div className="cd-ocr-drop-icon">🖼️</div>
+                        <div className="cd-ocr-drop-text">Upload / drop image</div>
+                        <div className="cd-ocr-drop-hint">or use camera below</div>
+                      </>}
+                    </div>
+                    <input ref={ocrFileRef} type="file" accept="image/*" style={{ display:"none" }} onChange={e => handleOcrFile(e.target.files[0])} />
+                    <canvas ref={canvasRef} style={{ display:"none" }} />
+                    {cameraOn && (
+                      <div style={{ borderRadius:8, overflow:"hidden", border:"1.5px solid #99eebb" }}>
+                        <video ref={videoRef} autoPlay playsInline style={{ width:"100%", display:"block", height:80, objectFit:"cover" }} />
+                      </div>
+                    )}
+                    <div style={{ display:"flex", gap:6 }}>
+                      {!cameraOn
+                        ? <button className="cd-ocr-btn-gray" style={{ flex:1 }} onClick={startCamera}>📷 Camera</button>
+                        : <><button className="cd-ocr-btn" style={{ flex:1 }} onClick={snapPhoto}>📸 Snap</button><button className="cd-ocr-btn-gray" style={{ flex:1 }} onClick={stopCamera}>✕</button></>
+                      }
+                      {ocrPreview && <button className="cd-ocr-btn-gray" style={{ flex:1 }} onClick={() => { setOcrImage(null); setOcrPreview(null); setOcrMeds([]); }}>↺</button>}
+                    </div>
+                    {ocrProcessing && <>
+                      <div className="cd-ocr-progress"><div className="cd-ocr-progress-fill" style={{ width:`${ocrProgress}%` }} /></div>
+                      <div className="cd-ocr-status">{ocrStatus}</div>
+                    </>}
+                    {ocrMeds.length > 0 && (
+                      <div className="cd-ocr-meds">
+                        {ocrMeds.map(m => <span key={m} className="cd-ocr-med-chip" title="Click to save" onClick={() => saveMedFromOcr(m)}>{m}</span>)}
+                      </div>
+                    )}
+                    <button className="cd-ocr-btn" onClick={runOCR} disabled={!ocrImage || ocrProcessing}>
+                      {ocrProcessing ? "Scanning..." : "🔍 Scan Now"}
+                    </button>
+                  </div>
+                </div>
+            </div>
 
             {/* Nearby pharmacies — hidden during search */}
             {!hasSearched && (
